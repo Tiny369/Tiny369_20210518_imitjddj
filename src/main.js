@@ -3,8 +3,12 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+import 'lib-flexible/flexible'
+
 import 'normalize.css'
-import './style/base.scss'
+// import './style/base.scss'
+// import './style/iconfont.css'
+import './style/index.css'
 
 Vue.config.productionTip = false
 
