@@ -309,38 +309,38 @@
 }
 
 // 容器
-  .docker {
+.docker {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 49px;
+  // border-top: 1px solid #F1F1F1;
+  border-top: 1px solid red;
+  // 每项
+  .docker__item {
+    flex: 1;
     display: flex;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 49px;
-    // border-top: 1px solid #F1F1F1;
-    border-top: 1px solid red;
-    // 每项
-    .docker__item {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 0 18px;
-      // 激活时状态
-      &.docker__item--active {
-        color: #1FA4FC;
-      }
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 18px;
+    // 激活时状态
+    &.docker__item--active {
+      color: #1FA4FC;
     }
-    // 每项名称
-    .docker__title {
-      font-size: 10px;
-      margin-top: 2px;
-    }
-    // icon图标
-    .iconfont {
-      font-size: 20px;
-    }
-
   }
-  
+  // 每项名称
+  .docker__title {
+    font-size: 10px;
+    margin-top: 2px;
+  }
+  // icon图标
+  .iconfont {
+    font-size: 20px;
+  }
+
+}
+
 </style>
