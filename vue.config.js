@@ -1,9 +1,10 @@
 const px2rem = require('postcss-px2rem')  
 
 module.exports = {
-    // devServer: {
-    //    open:true
-    // } 
+    devServer: {
+       open:true
+    },
+    
     lintOnSave:false,
 
     css: {
