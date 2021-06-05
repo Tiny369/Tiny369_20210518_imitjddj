@@ -1,18 +1,21 @@
 <template>
   <div class="indexContainer">
-    <Home />
+    <!-- <Home /> -->
+    <!-- <Login /> -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-  import Home from './views/home/Home.vue'
+  // import Home from './views/home/Home.vue'
+  // import Login from './views/login/Login'
   export default {
     components:{
-      Home
+      // Home
+      // Login
     }
   }
 </script>
 
 <style lang="scss" >
-
 </style>
