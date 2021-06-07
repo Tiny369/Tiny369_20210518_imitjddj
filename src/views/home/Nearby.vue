@@ -2,16 +2,31 @@
     <!-- 附近店铺列表 -->
     <div class="nearby">
         <div class="nearby__title">附近店铺</div>
-        <div class="nearby__list" v-for="(item,index) in nearbyList" :key="index">
+        <ShopInfo v-for="(item,index) in nearbyList" :key="index" :item="item" />
+        <!-- <div class="nearby__list" v-for="(item,index) in nearbyList" :key="index">
             <div class="nearby__itemImg"><img :src="item.imgUrl" alt=""></div>
             <div class="nearby__detail">
-            <div class="nearby__detail__name">{{item.title}}</div>
-            <div class="nearby__detail__sell" >
-                <span v-for="(item2,index) in item.tags" :key="index">{{item2}}</span>
-            </div>
-            <div class="nearby__detail__vip">{{item.desc}}</div>
-            </div>
-        </div>
+            <div class="nearby__detail__name">{{item.title}}</div> -->
+
+            <!-- 动态数据 -->
+            <!-- <div class="nearby__detail__name">{{item.name}}</div> -->
+
+            <!-- <div class="nearby__detail__sell" >
+                <span v-for="(item2,index) in item.tags" :key="index">{{item2}}</span> -->
+
+              <!-- 动态数据 -->
+              <!--  <span >月售:{{item.sales}}</span>
+                <span >起送:{{item.expressPrice}}</span>
+                <span >基础运费:{{item.expressLimit}}</span> -->
+
+            <!-- </div> -->
+            <!-- <div class="nearby__detail__vip">{{item.desc}}</div> -->
+
+            <!-- 动态数据 -->
+            <!-- <div class="nearby__detail__vip">{{item.slogan}}</div> -->
+
+            <!-- </div> -->
+        <!-- </div> -->
        <!--  <div class="nearby__list">
             <div class="nearby__itemImg"><img src="https://img30.360buyimg.com/vendersettle/s120x120_jfs/t1/154191/22/20408/133000/60b0f5fdEe9406045/44a52949175ab2f7.png" alt=""></div>
             <div class="nearby__detail">
@@ -77,10 +92,16 @@
 </template>
 
 <script>
+  import request from '../../util/request.js'
+  import ShopInfo from '../../components/ShopInfo.vue'
   export default {
+    components:{
+      ShopInfo
+    },
     name:"Nearby",
     data() {
       return {
+        // 自定义附近商家数据
         nearbyList: [
           {
             id: 1,
@@ -125,7 +146,15 @@
             desc: '商家会员享满119元减4元运费（每月1次），享满129元减4元运费（每月1次），享满149元减4元运费（每月1次）'
           },
         ],
+        // 附近商家数据（动态数据）
+        // nearbyList:[]
       }
+    },
+    async mounted() {
+      // 获取商家信息数据
+      let result = await request('/api/shop/hot-list',{},'get',{'Content-Type': 'application/json'})
+      // 动态数据赋值
+      // this.nearbyList = result.data
     },
   }
 </script>
@@ -141,7 +170,7 @@
         font-size: 18px;
         font-weight: bold;
       }
-      .nearby__list {
+     /*  .nearby__list {
         margin-top: 14px;
         padding-bottom: 14px;
         display: flex;
@@ -184,7 +213,7 @@
             @include ellipsis;
           }
         }
-      }
+      } */
     }
 
 </style>

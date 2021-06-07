@@ -2,27 +2,71 @@
 <!-- 注册页面 -->
   <div class="registerContainer">
     <img class="register__head" src="http://www.dell-lee.com/imgs/vue3/user.png" alt="">
-    <input class="register__usernameInput" type="text" placeholder="请输入手机号">
-    <input class="register__pwInput" type="text" placeholder="请输入密码">
-    <input class="register__pwInput" type="text" placeholder="确认密码">
+    <input class="register__usernameInput" type="text" placeholder="请输入手机号" v-model="userRegInfo.username">
+    <input class="register__pwInput" type="password" placeholder="请输入密码" v-model="userRegInfo.password">
+    <input class="register__pwInput" type="password" placeholder="确认密码" v-model="userRegInfo.passwordConfirm">
     <div class="register__btn" @click="handleRegister">注册</div>
     <div class="register__toLogin" @click="toLogin">已有账号去登陆</div>
+    <Toast v-if="isShowToast" :toastMessage="toastMessage" />
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import router from 'vue-router'
+  import request from '../../util/request.js'
+  import Toast from '../../components/Toast.vue'
   export default {
     name:"Register",
-    methods: {
-        // 注册点击事件
-        handleRegister (){
-
+    components:{
+      Toast
+    },
+    data() {
+      return {
+        userRegInfo:{
+          username:'',
+          password:'',
+          passwordConfirm:''
         },
-        // 已有账号去登陆
-        toLogin (){
-            this.$router.push( { name:"Login"} )
+        isShowToast:false,
+        toastMessage:''
+      }
+    },
+    methods: {
+      // 注册点击事件
+      async handleRegister (){
+        let { username,password,passwordConfirm } = this.userRegInfo
+        if(!username.trim()){
+          return this.ToastMS('请输入帐号')
+        }else if(!password.trim()){
+          return this.ToastMS('请输入密码')
+        }else if(!passwordConfirm.trim()){
+          return this.ToastMS('请确认密码')
         }
+        try {
+          let result = await request('/api/user/register',this.userRegInfo,'post',{'Content-Type': 'application/json'})
+          if(result.errno === 0){
+            this.ToastMS('注册成功')
+            setTimeout(() => {
+              this.$router.push( { name:"Login"} )
+            }, 900);    
+          }else{
+            this.ToastMS('注册失败')
+          }
+        } catch (error) {
+          this.ToastMS('请求失败')
+        }
+      },
+      ToastMS (message){
+        this.isShowToast = true
+        this.toastMessage = message
+        setTimeout(() => {
+          this.isShowToast = false
+          this.toastMessage = ''
+        }, 1200);
+      },
+      // 已有账号去登陆
+      toLogin (){
+        this.$router.push( { name:"Login"} )
+      }
     },
   }
 </script>

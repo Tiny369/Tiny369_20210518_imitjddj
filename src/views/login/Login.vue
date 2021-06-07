@@ -3,7 +3,7 @@
   <div class="loginContainer">
     <img class="login__head" src="http://www.dell-lee.com/imgs/vue3/user.png" alt="">
     <input class="login__usernameInput" type="text" placeholder="请输入手机号" v-model="userInfo.username">
-    <input class="login__pwInput" type="text" placeholder="请输入密码" v-model="userInfo.password">
+    <input class="login__pwInput" type="password" placeholder="请输入密码" v-model="userInfo.password">
     <div class="login__btn" @click="handleLogin">登陆</div>
     <div class="login__register" @click="toRegister">立即注册</div>
     <Toast v-if="isShowToast" :toastMessage="toastMessage" />
@@ -12,8 +12,8 @@
 
 <script type="text/ecmascript-6">
 // import axios from 'axios'
-import request from '../../util/request.js'
-import Toast from '../../components/Toast.vue'
+  import request from '../../util/request.js'
+  import Toast from '../../components/Toast.vue'
   export default {
     name:"Login",
     components:{
@@ -52,13 +52,21 @@ import Toast from '../../components/Toast.vue'
             .then( () => alert('成功') )
             .catch( () => alert('失败') ) 
         */
-
+        let { username,password } = this.userInfo
+        if(!username.trim()){
+          return this.ToastMS('请输入帐号')
+        }else if(!password.trim()){
+          return this.ToastMS('请输入密码')
+        }
         try {
           let result = await request('/api/user/login',this.userInfo,'post',{'Content-Type': 'application/json'})
           console.log(result);
           if(result.errno === 0){
-            localStorage.isLogin = true     // 添加本地存储isLogin属性的值
-            this.$router.push( { name:"Home"} )    // 跳转至首页
+            this.ToastMS('登陆成功')
+            setTimeout(() => {
+              localStorage.isLogin = true     // 添加本地存储isLogin属性的值
+              this.$router.push( { name:"Home"} )    // 跳转至首页
+            }, 900);
           }else{
             // alert('登陆失败')
             this.ToastMS('登陆失败')
