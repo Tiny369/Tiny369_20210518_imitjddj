@@ -18,7 +18,7 @@ let router = new Router({
       component: () => import(/* webpackChunkName: "Home" */ './views/home/Home.vue'),
     },
     {
-      path:'/shop',
+      path:'/shop/:id',
       name:'Shop',
       // component:Shop
       component: () => import(/* webpackChunkName: "Shop" */ './views/shop/Shop.vue'),

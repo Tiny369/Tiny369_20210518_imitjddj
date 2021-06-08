@@ -2,7 +2,10 @@
     <!-- 附近店铺列表 -->
     <div class="nearby">
         <div class="nearby__title">附近店铺</div>
-        <ShopInfo v-for="(item,index) in nearbyList" :key="index" :item="item" />
+        <!-- <router-link :to="`/shop/${item.id}`" v-for="(item,index) in nearbyList" :key="item.id" > -->
+        <router-link :to="`/shop/${index}`" v-for="(item,index) in nearbyList" :key="index" >
+          <ShopInfo :item="item" />
+        </router-link>
         <!-- <div class="nearby__list" v-for="(item,index) in nearbyList" :key="index">
             <div class="nearby__itemImg"><img :src="item.imgUrl" alt=""></div>
             <div class="nearby__detail">
@@ -150,6 +153,13 @@
         // nearbyList:[]
       }
     },
+    methods: {
+      // 去商家详情页面
+      toShop (){
+        // this.$router.push('/shop')
+        console.log('haha');
+      },
+    },
     async mounted() {
       // 获取商家信息数据
       let result = await request('/api/shop/hot-list',{},'get',{'Content-Type': 'application/json'})
@@ -170,6 +180,11 @@
         font-size: 18px;
         font-weight: bold;
       }
+      a {
+        text-decoration: none;
+        color: black;
+      }
+
      /*  .nearby__list {
         margin-top: 14px;
         padding-bottom: 14px;
