@@ -1,4 +1,5 @@
 <template>
+<!-- 商铺信息 -->
     <!-- <div class="shop"> -->
         <!-- <div class="shop__list" v-for="(item,index) in shopList" :key="index"> -->
         <div class="shop__list" :class="{'shop__list__bd':hideBorderBottom ? false : true}">

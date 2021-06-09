@@ -1,4 +1,5 @@
 <template>
+<!-- 商家详情页面 -->
   <div class="shopContainer">
     <div class="shop__head">
       <div class="shop__back iconfont" @click="$router.back()">&#xe677;</div>
@@ -8,16 +9,19 @@
       </div>
     </div>
     <ShopInfo :item="itemData" :hideBorderBottom="true" v-show="itemData.imgUrl"/>
+    <Content />
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import ShopInfo from '../../components/ShopInfo.vue'
   import request from '../../util/request.js'
+  import Content from './Content.vue'
   export default {
     name:'Shop',
     components:{
-      ShopInfo
+      ShopInfo,
+      Content
     },
     data() {
       return {
