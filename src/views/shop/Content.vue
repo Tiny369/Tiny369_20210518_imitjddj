@@ -2,21 +2,56 @@
   <div class="contentContainer">
 
     <!-- 左侧分类 -->
-    <div class="category">
-      <div class="category__item category__item-active">全部商品</div>
-      <div class="category__item">秒杀</div>
-      <div class="category__item">新鲜水果</div>
-      <div class="category__item">休闲食品</div>
+    <div class="category" >
+      <div class="category__item" 
+      :class="{'category__item':true,' category__item-active':currentTab === item.tab}"
+        v-for="(item,index) in tabData" 
+        :key="index" @click="categoryItemClick(item.tab)">{{item.name}}</div>
+     <!--  <div class="category__item">秒杀</div>
+      <div class="category__item">新鲜水果</div> -->
+ <!--      <div class="category__item">休闲食品</div>
       <div class="category__item">时令蔬菜</div>
-      <div class="category__item">肉蛋家禽</div>
+      <div class="category__item">肉蛋家禽</div> -->
     </div>
 
     <!-- 右侧内容区 -->
     <div class="detail">
+      <div class="detail__item" v-for="(item,index) in detailItemData" :key="index">
+        <img class="detail__img" :src="item.imgUrl" alt="">
+        <div class="detail__content">
+          <div class="detailContent__title">{{item.name}}</div>
+          <div class="detailContent__sale">月售{{item.sales}}件</div>
+          <div class="detailContent__PriceOrder">
+            <span class="detailContent__Price">¥{{item.price}}</span>
+            <span class="detailContent__Order">¥{{item.oldPrice}}</span>
+            <div class="detailContent__right">
+              <span class="detailContent__minus">-</span>
+              <span class="detailContent__count">0</span>
+              <span class="detailContent__add">+</span>
+            </div>
+          </div>
+        </div>
+      </div>
+     <!--  <div class="detail__item">
+        <img class="detail__img" src="https://img30.360buyimg.com/n1//s160x160_jfs/t1/193337/4/7165/45559/60beeafaE762cc46e/6f3aa421749564c8.jpg" alt="">
+        <div class="detail__content">
+          <div class="detailContent__title">番茄250g/份</div>
+          <div class="detailContent__sale">月售10件</div>
+          <div class="detailContent__PriceOrder">
+            <span class="detailContent__Price">¥33.6</span>
+            <span class="detailContent__Order">¥33.6</span>
+            <div class="detailContent__right">
+              <span class="detailContent__minus">-</span>
+              <span class="detailContent__count">0</span>
+              <span class="detailContent__add">+</span>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="detail__item">
         <img class="detail__img" src="https://img30.360buyimg.com/n1//s160x160_jfs/t1/193337/4/7165/45559/60beeafaE762cc46e/6f3aa421749564c8.jpg" alt="">
         <div class="detail__content">
-          <div class="detailContent__title">番茄250g/份番茄250g/份番茄250g/份</div>
+          <div class="detailContent__title">番茄250g/份</div>
           <div class="detailContent__sale">月售10件</div>
           <div class="detailContent__PriceOrder">
             <span class="detailContent__Price">¥33.6</span>
@@ -29,7 +64,7 @@
           </div>
         </div>
       </div>
-       <div class="detail__item">
+      <div class="detail__item">
         <img class="detail__img" src="https://img30.360buyimg.com/n1//s160x160_jfs/t1/193337/4/7165/45559/60beeafaE762cc46e/6f3aa421749564c8.jpg" alt="">
         <div class="detail__content">
           <div class="detailContent__title">番茄250g/份</div>
@@ -45,7 +80,7 @@
           </div>
         </div>
       </div>
-       <div class="detail__item">
+      <div class="detail__item">
         <img class="detail__img" src="https://img30.360buyimg.com/n1//s160x160_jfs/t1/193337/4/7165/45559/60beeafaE762cc46e/6f3aa421749564c8.jpg" alt="">
         <div class="detail__content">
           <div class="detailContent__title">番茄250g/份</div>
@@ -61,7 +96,7 @@
           </div>
         </div>
       </div>
-       <div class="detail__item">
+      <div class="detail__item">
         <img class="detail__img" src="https://img30.360buyimg.com/n1//s160x160_jfs/t1/193337/4/7165/45559/60beeafaE762cc46e/6f3aa421749564c8.jpg" alt="">
         <div class="detail__content">
           <div class="detailContent__title">番茄250g/份</div>
@@ -76,39 +111,7 @@
             </div>
           </div>
         </div>
-      </div>
-       <div class="detail__item">
-        <img class="detail__img" src="https://img30.360buyimg.com/n1//s160x160_jfs/t1/193337/4/7165/45559/60beeafaE762cc46e/6f3aa421749564c8.jpg" alt="">
-        <div class="detail__content">
-          <div class="detailContent__title">番茄250g/份</div>
-          <div class="detailContent__sale">月售10件</div>
-          <div class="detailContent__PriceOrder">
-            <span class="detailContent__Price">¥33.6</span>
-            <span class="detailContent__Order">¥33.6</span>
-            <div class="detailContent__right">
-              <span class="detailContent__minus">-</span>
-              <span class="detailContent__count">0</span>
-              <span class="detailContent__add">+</span>
-            </div>
-          </div>
-        </div>
-      </div>
-       <div class="detail__item">
-        <img class="detail__img" src="https://img30.360buyimg.com/n1//s160x160_jfs/t1/193337/4/7165/45559/60beeafaE762cc46e/6f3aa421749564c8.jpg" alt="">
-        <div class="detail__content">
-          <div class="detailContent__title">番茄250g/份</div>
-          <div class="detailContent__sale">月售10件</div>
-          <div class="detailContent__PriceOrder">
-            <span class="detailContent__Price">¥33.6</span>
-            <span class="detailContent__Order">¥33.6</span>
-            <div class="detailContent__right">
-              <span class="detailContent__minus">-</span>
-              <span class="detailContent__count">0</span>
-              <span class="detailContent__add">+</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      </div> -->
       
     </div>
 
@@ -116,7 +119,44 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import request from '../../util/request.js'
   export default {
+    data() {
+      return {
+        // 列表数据
+        detailItemData:[],
+        // 分类项值
+        tabData:[
+          { name:'全部商品',tab:'all'},
+          { name:'秒杀',tab:'seckill'},
+          { name:'新鲜水果',tab:'fruit'},
+        ],
+        currentTab:'all'
+      }
+    },
+    name:"Content",
+    methods: {
+      categoryItemClick (tab){
+        this.getDetailItemData(tab)
+        // this.currentTab = this.tabData[0].tab
+        this.currentTab = tab
+        // console.log(this.currentTab);
+      },
+      // 请求商品列表信息
+      async getDetailItemData(tab) {
+        console.log({tab});
+        let shopId = this.$route.params.id
+        let result = await request(`/api/shop/${shopId}/products?tab=${tab}`)
+        if(result.errno === 0 && result.data.length){
+          this.detailItemData = result.data
+        }
+        // console.log(result);
+      }
+    },
+    mounted() {
+      // 获取商品列表信息  tab 值是: all 或 seckill 或 fruit
+      this.getDetailItemData('all')
+    },
   }
 </script>
 
